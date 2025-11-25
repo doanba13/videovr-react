@@ -6,7 +6,6 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import "@fontsource/inter";
 
 const queryClient = new QueryClient()
 
