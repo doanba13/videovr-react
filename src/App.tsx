@@ -1,8 +1,19 @@
 import { useState } from 'react';
 import VideoVR from './components/VideoVR';
 
+const videos = [
+  { name: 'Eagle 360', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/eagle-360.mp4', type: 'video/mp4', projection: '360' },
+  { name: 'Coriolis EAC', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/coriolis_eac.webm', type: 'video/webm', projection: 'EAC' },
+  { name: 'Coriolis Rect', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/coriolis_rect.webm', type: 'video/webm', projection: '360' },
+  { name: 'Doisethup Cubemap', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/doisethup_cubemap.mp4', type: 'video/mp4', projection: '360_CUBE' },
+  { name: 'LCS15 EAC', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/lcs15_eac.webm', type: 'video/webm', projection: 'EAC' },
+  { name: 'LCS15 Rect', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/lcs15_rect.webm', type: 'video/webm', projection: '360' },
+  { name: 'Video 180', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/video_180.mp4', type: 'video/mp4', projection: '180' },
+  { name: 'Video 180 Left Eye', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/video_180_lefteyeonly.mp4', type: 'video/mp4', projection: '180_MONO' },
+];
+
 function App() {
-  const [videoSrc, setVideoSrc] = useState('/eagle-360.mp4');
+  const [currentVideo, setCurrentVideo] = useState(videos[0]);
 
   return (
     <div className="min-h-screen bg-slate-900 text-white p-8 flex flex-col items-center">
@@ -10,40 +21,41 @@ function App() {
 
       <div className="w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden shadow-2xl border border-slate-700">
         <VideoVR
-          src={videoSrc}
-          type="video/mp4"
+          key={currentVideo.src} // Force remount when video changes to ensure correct projection
+          src={currentVideo.src}
+          type={currentVideo.type}
           options={{
             autoplay: false,
             controls: true,
             fluid: true,
           }}
           vrOptions={{
-            projection: '360',
+            projection: currentVideo.projection as any,
             debug: true,
             forceCardboard: false,
           }}
         />
       </div>
 
-      <div className="mt-8 p-4 bg-slate-800 rounded-lg max-w-2xl w-full">
-        <h2 className="text-xl font-semibold mb-4">Controls</h2>
-        <p className="mb-2 text-slate-300">
-          Click and drag on the video to look around.
-          On mobile, move your device to look around (gyroscope).
-        </p>
-        <div className="flex gap-4 mt-4">
-          <button
-            onClick={() => setVideoSrc('/eagle-360.mp4')}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded transition-colors"
-          >
-            Load Eagle 360
-          </button>
-          <button
-            onClick={() => setVideoSrc('https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv')}
-            className="px-4 py-2 bg-slate-600 hover:bg-slate-500 rounded transition-colors"
-          >
-            Load Standard Video (Test)
-          </button>
+      <div className="mt-8 p-4 bg-slate-800 rounded-lg max-w-4xl w-full">
+        <h2 className="text-xl font-semibold mb-4">Select Video</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {videos.map((video) => (
+            <button
+              key={video.name}
+              onClick={() => setCurrentVideo(video)}
+              className={`px-4 py-2 rounded transition-colors text-sm font-medium ${currentVideo.name === video.name
+                ? 'bg-blue-600 text-white'
+                : 'bg-slate-700 hover:bg-slate-600 text-slate-200'
+                }`}
+            >
+              {video.name}
+            </button>
+          ))}
+        </div>
+        <div className="mt-4 text-sm text-slate-400">
+          <p>Current Projection: <span className="font-mono text-blue-400">{currentVideo.projection}</span></p>
+          <p>Source: <span className="font-mono text-slate-500">{currentVideo.src}</span></p>
         </div>
       </div>
     </div>
