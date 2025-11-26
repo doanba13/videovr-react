@@ -2,10 +2,6 @@ import { useState } from 'react';
 import VideoVR from './components/VideoVR';
 
 const videos = [
-  { name: 'Eagle 360', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/eagle-360.mp4', type: 'video/mp4', projection: '360' },
-  { name: 'Coriolis EAC', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/coriolis_eac.webm', type: 'video/webm', projection: 'EAC' },
-  { name: 'Coriolis Rect', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/coriolis_rect.webm', type: 'video/webm', projection: '360' },
-  { name: 'Doisethup Cubemap', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/doisethup_cubemap.mp4', type: 'video/mp4', projection: '360_CUBE' },
   { name: 'LCS15 EAC', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/lcs15_eac.webm', type: 'video/webm', projection: 'EAC' },
   { name: 'LCS15 Rect', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/lcs15_rect.webm', type: 'video/webm', projection: '360' },
   { name: 'Video 180', src: 'https://raw.githubusercontent.com/videojs/videojs-vr/main/samples/video_180.mp4', type: 'video/mp4', projection: '180' },
@@ -24,13 +20,13 @@ function App() {
           key={currentVideo.src} // Force remount when video changes to ensure correct projection
           src={currentVideo.src}
           type={currentVideo.type}
+          projection={currentVideo.projection}
           options={{
             autoplay: false,
             controls: true,
             fluid: true,
           }}
           vrOptions={{
-            projection: currentVideo.projection as any,
             debug: true,
             forceCardboard: false,
           }}

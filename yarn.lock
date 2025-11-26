@@ -2019,10 +2019,10 @@ tapable@^2.2.0:
   resolved "https://registry.npmjs.org/tapable/-/tapable-2.3.0.tgz"
   integrity sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==
 
-three@0.125.2:
-  version "0.125.2"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.125.2.tgz#dcba12749a2eb41522e15212b919cd3fbf729b12"
-  integrity sha512-7rIRO23jVKWcAPFdW/HREU2NZMGWPBZ4XwEMt0Ak0jwLUKVJhcKM55eCBWyGZq/KiQbeo1IeuAoo/9l2dzhTXA==
+three@0.93.0:
+  version "0.93.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.93.0.tgz#3fd6c367ef4554abbb6e16ad69936283e895c123"
+  integrity sha512-Ys9+UBBsd6FxTZZl4BH7B4b2F+B2uR0cOwY7OQ/aCzU/VgO4Wmmr1LbWPH1fsTvSVik9KAuwxwOHlSC4IMGOLA==
 
 tinyglobby@^0.2.15:
   version "0.2.15"
@@ -2125,14 +2125,14 @@ videojs-font@3.2.0:
   resolved "https://registry.yarnpkg.com/videojs-font/-/videojs-font-3.2.0.tgz#212c9d3f4e4ec3fa7345167d64316add35e92232"
   integrity sha512-g8vHMKK2/JGorSfqAZQUmYYNnXmfec4MLhwtEFS+mMs2IDY398GLysy6BH6K+aS1KMNu/xWZ8Sue/X/mdQPliA==
 
-videojs-vr@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/videojs-vr/-/videojs-vr-2.0.0.tgz#3d86e3fececf7373cfb89b950ed6ab77ca783d2b"
-  integrity sha512-ix4iN8XHaDSEe89Jqybj9DuLKYuK33EIzcSI0IEdnv1KJuH8bd0PYlQEgqIZTOmWruFpW/+rjYFCVUQ9PTypJw==
+videojs-vr@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/videojs-vr/-/videojs-vr-1.8.0.tgz#7f2f07f760d8a329c615acd316e49da6ee8edd34"
+  integrity sha512-776gXqt8g6/rLeV56nn/aUcO0sRy+mgFITCw8cIqzTzl93SE1PEK/QE3YNqtppUfU5igayrx7WKsWhDOpsXMpw==
   dependencies:
     "@babel/runtime" "^7.14.5"
     global "^4.4.0"
-    three "0.125.2"
+    three "0.93.0"
     video.js "^6 || ^7"
     webvr-polyfill "0.10.12"
 

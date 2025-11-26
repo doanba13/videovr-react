@@ -12,6 +12,7 @@ import 'videojs-vr';
 interface VideoVRProps {
     src: string;
     type?: string;
+    projection?: string; // Content projection (e.g., '360', '180', '360_CUBE')
     options?: any; // videojs.PlayerOptions might not be exported or named differently
     vrOptions?: VideoJsVRPluginOptions;
     onReady?: (player: videojs.Player) => void;
@@ -20,6 +21,7 @@ interface VideoVRProps {
 export const VideoVR: React.FC<VideoVRProps> = ({
     src,
     type = 'video/mp4',
+    projection,
     options,
     vrOptions,
     onReady,
@@ -60,20 +62,37 @@ export const VideoVR: React.FC<VideoVRProps> = ({
                 onReady && onReady(player);
             }));
 
+            // Set projection in mediainfo as per videojs-vr examples
+            if (projection) {
+                (player as any).mediainfo = (player as any).mediainfo || {};
+                (player as any).mediainfo.projection = projection;
+            }
+
             console.log('Checking for VR plugin...');
             if (player.vr) {
-                console.log('VR plugin found, initializing with options:', vrOptions);
-                player.vr(vrOptions);
+                // Pass the projection directly to the plugin if provided, otherwise fallback to AUTO
+                const pluginOptions = {
+                    ...vrOptions,
+                    projection: projection || 'AUTO'
+                };
+                console.log('VR plugin found, initializing with options:', pluginOptions);
+                player.vr(pluginOptions);
             } else {
                 console.error('videojs-vr plugin NOT found on player instance!');
             }
         } else {
             const player = playerRef.current;
             if (player) {
+                // Update mediainfo projection when props change
+                if (projection) {
+                    (player as any).mediainfo = (player as any).mediainfo || {};
+                    (player as any).mediainfo.projection = projection;
+                }
+
                 (player as any).src({ src, type });
             }
         }
-    }, [options, videoRef, src, type, vrOptions, onReady]);
+    }, [options, videoRef, src, type, projection, vrOptions, onReady]);
 
     useEffect(() => {
         const player = playerRef.current;
